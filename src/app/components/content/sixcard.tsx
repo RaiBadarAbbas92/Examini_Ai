@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { FaSpinner } from 'react-icons/fa';
 
 const ContentUpload: React.FC = () => {
   const router = useRouter();
@@ -323,7 +324,7 @@ const ContentUpload: React.FC = () => {
                   className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
                   disabled={loading}
                 >
-                  {loading ? 'Uploading...' : 'Upload'}
+                  {loading ? <FaSpinner className="animate-spin" /> : 'Upload'}
                 </button>
               </div>
             </div>
