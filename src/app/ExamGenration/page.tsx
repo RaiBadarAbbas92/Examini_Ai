@@ -23,7 +23,7 @@ const ExamGenerationAndConfirmationPage = () => {
   const handleGenerateExam = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem('auth_token');
+      const token = localStorage.getItem('access_token');
       const selectedContentIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
       
       if (!token || !examParams || !selectedContentIds.length) {
