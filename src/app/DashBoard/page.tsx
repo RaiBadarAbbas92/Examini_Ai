@@ -241,13 +241,14 @@ const ExamList = () => {
               <h2 className="text-2xl font-bold mb-2">Welcome back, Student!</h2>
               <p className="opacity-90">Track your progress and performance all in one place</p>
             </div>
-            <button
-              className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-green-50 transition-colors flex items-center space-x-2"
-              onClick={() => handleNavigation('Generate Exam')}
-            >
-              <FaPencilAlt className="w-5 h-5" />
-              <span>Generate New Exam</span>
-            </button>
+            <Link href="/ContentUpload">
+              <button
+                className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-green-50 transition-colors flex items-center space-x-2"
+              >
+                <FaPencilAlt className="w-5 h-5" />
+                <span>Generate New Exam</span>
+              </button>
+            </Link>
           </div>
         </div>
 
