@@ -10,7 +10,7 @@ const YouTubeLinkPad = () => {
     "https://examinieai.kindsky-c4c0142e.eastus.azurecontainerapps.io/content_upload/upload_youtube_video/";
 
   const handleSubmit = async () => {
-    const authToken = localStorage.getItem("auth_token");
+    const authToken = localStorage.getItem("access_token");
 
     if (!authToken) {
       alert("Authentication token is missing. Please log in again.");
