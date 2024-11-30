@@ -18,7 +18,7 @@ const ArticlePad = () => {
     setMessage(""); // Clear any previous messages
 
     try {
-      const token = localStorage.getItem('auth_token');
+      const token = localStorage.getItem('access_token');
       if (!token) {
         throw new Error('No authentication token found');
       }
