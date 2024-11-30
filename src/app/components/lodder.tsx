@@ -1,199 +1,51 @@
-// "use client"
-// import { motion } from 'framer-motion';
-// import { FaPencilAlt, FaBook, FaCog, FaCheck } from 'react-icons/fa';
+"use client"
+import { FaPencilAlt, FaBook, FaCog, FaCheck } from 'react-icons/fa';
 
-// const Loader = () => {
-//   return (
-//     <div className="fixed inset-0 bg-gradient-to-br from-black/70 to-green-900/50 backdrop-blur-sm flex items-center justify-center z-50">
-//       <div className="bg-white/90 p-10 rounded-2xl shadow-2xl text-center border-2 border-green-200">
-//         <div className="relative">
-//           <motion.div
-//             animate={{
-//               scale: [1, 1.2, 1],
-//               rotate: [0, 360],
-//             }}
-//             transition={{
-//               duration: 2,
-//               repeat: Infinity,
-//               ease: "easeInOut"
-//             }}
-//             className="flex justify-center mb-6 space-x-4"
-//           >
-//             <motion.div
-//               animate={{ opacity: [0.4, 1, 0.4] }}
-//               transition={{ duration: 2, repeat: Infinity, delay: 0 }}
-//             >
-//               <FaBook className="w-16 h-16 text-blue-500" />
-//             </motion.div>
-//             <motion.div
-//               animate={{ opacity: [0.4, 1, 0.4] }}
-//               transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
-//             >
-//               <FaCog className="w-16 h-16 text-yellow-500" />
-//             </motion.div>
-//             <motion.div
-//               animate={{ opacity: [0.4, 1, 0.4] }}
-//               transition={{ duration: 2, repeat: Infinity, delay: 1.2 }}
-//             >
-//               <FaPencilAlt className="w-16 h-16 text-green-500" />
-//             </motion.div>
-//           </motion.div>
-//         </div>
+const Loader = () => {
+  return (
+    <div className="fixed inset-0 bg-gradient-to-br from-black/70 to-green-900/50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white/90 p-10 rounded-2xl shadow-2xl text-center border-2 border-green-200">
+        <div className="relative">
+          <div className="flex justify-center mb-6 space-x-4 animate-bounce">
+            <div className="transition-opacity duration-1000 animate-pulse">
+              <FaBook className="w-16 h-16 text-blue-500 animate-spin" />
+            </div>
+            <div className="transition-opacity duration-1000 animate-pulse delay-300">
+              <FaCog className="w-16 h-16 text-yellow-500 animate-spin" />
+            </div>
+            <div className="transition-opacity duration-1000 animate-pulse delay-500">
+              <FaPencilAlt className="w-16 h-16 text-green-500 animate-spin" />
+            </div>
+          </div>
+        </div>
 
-//         <motion.div
-//           initial={{ width: 0 }}
-//           animate={{ width: "100%" }}
-//           transition={{
-//             duration: 2,
-//             repeat: Infinity,
-//             ease: "linear"
-//           }}
-//           className="h-2 bg-green-500 rounded-full mt-6"
-//         />
+        <div className="relative h-2 bg-gray-200 rounded-full mt-6 overflow-hidden">
+          <div className="absolute top-0 left-0 h-full bg-green-500 animate-progress rounded-full w-full"></div>
+        </div>
 
-//         <div className="mt-4 space-y-2">
-//           <motion.p
-//             animate={{
-//               opacity: [0.5, 1, 0.5]
-//             }}
-//             transition={{
-//               duration: 1.5,
-//               repeat: Infinity,
-//               ease: "easeInOut",
-//               delay: 0.5
-//             }}
-//             className="text-gray-600 text-lg"
-//           >
-//             Generating your exam...
-//           </motion.p>
-//           <motion.div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
-//             <motion.span
-//               animate={{ opacity: [0.5, 1, 0.5] }}
-//               transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
-//             >
-//               Analyzing curriculum
-//             </motion.span>
-//             <motion.span
-//               animate={{ opacity: [0.5, 1, 0.5] }}
-//               transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
-//             >
-//               Creating questions
-//             </motion.span>
-//             <motion.span
-//               animate={{ opacity: [0.5, 1, 0.5] }}
-//               transition={{ duration: 1.5, repeat: Infinity, delay: 1 }}
-//             >
-//               Finalizing exam
-//             </motion.span>
-//           </motion.div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+        <div className="mt-4 space-y-2">
+          <p className="text-gray-600 text-lg animate-pulse">
+            Generating your exam...
+          </p>
+          <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+            <span className="animate-pulse">
+              Analyzing curriculum
+            </span>
+            <span className="animate-pulse delay-150">
+              Creating questions
+            </span>
+            <span className="animate-pulse delay-300">
+              Finalizing exam
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// export default Loader;
+export default Loader;
 
-
-
-
-
-
-// "use client"
-// import { motion } from 'framer-motion';
-// import { FaRocket, FaCloudUploadAlt } from 'react-icons/fa';
-
-// const Loader = () => {
-//   return (
-//     <div className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
-//       <div className="text-center">
-//         <motion.div
-//           className="relative w-32 h-32 mx-auto mb-8"
-//           initial={{ y: 0 }}
-//           animate={{ 
-//             y: [-20, 20, -20],
-//             rotate: [0, 10, -10, 0]
-//           }}
-//           transition={{
-//             duration: 4,
-//             repeat: Infinity,
-//             ease: "easeInOut"
-//           }}
-//         >
-//           <FaRocket className="w-full h-full text-green-500" />
-//           <motion.div
-//             className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
-//             initial={{ scale: 0.5, opacity: 0.5 }}
-//             animate={{
-//               scale: [0.5, 1.5, 0.5],
-//               opacity: [0.5, 0.8, 0.5]
-//             }}
-//             transition={{
-//               duration: 2,
-//               repeat: Infinity,
-//               ease: "easeOut"
-//             }}
-//           >
-//             <div className="w-8 h-8 bg-orange-500 rounded-full blur-md" />
-//           </motion.div>
-//         </motion.div>
-
-//         <div className="mt-4 space-y-4">
-//           <motion.div
-//             className="flex items-center justify-center space-x-2"
-//             animate={{
-//               scale: [1, 1.05, 1],
-//               opacity: [0.8, 1, 0.8]
-//             }}
-//             transition={{
-//               duration: 2,
-//               repeat: Infinity,
-//               ease: "easeInOut"
-//             }}
-//           >
-//             <FaCloudUploadAlt className="w-8 h-8 text-green-500" />
-//             <span className="text-xl font-semibold text-gray-700">Uploading Files</span>
-//           </motion.div>
-
-//           <div className="flex items-center justify-center space-x-3">
-//             {[0, 1, 2].map((index) => (
-//               <motion.div
-//                 key={index}
-//                 className="w-3 h-3 bg-green-500 rounded-full"
-//                 animate={{
-//                   scale: [1, 1.5, 1],
-//                   opacity: [0.5, 1, 0.5]
-//                 }}
-//                 transition={{
-//                   duration: 1,
-//                   repeat: Infinity,
-//                   delay: index * 0.2,
-//                   ease: "easeInOut"
-//                 }}
-//               />
-//             ))}
-//           </div>
-
-//           <motion.div 
-//             className="text-sm text-gray-500"
-//             animate={{
-//               opacity: [0.5, 1, 0.5]
-//             }}
-//             transition={{
-//               duration: 2,
-//               repeat: Infinity,
-//               ease: "easeInOut"
-//             }}
-//           >
-//             Please wait while we process your files...
-//           </motion.div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Loader;
 
 
 

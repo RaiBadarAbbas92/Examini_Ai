@@ -34,13 +34,22 @@ const ContentUpload: React.FC = () => {
     }
 
     fetchContentHistory(token);
-    loadSelectedContents();
   }, []);
 
+  useEffect(() => {
+    loadSelectedContents();
+  }, [history]);
+
   const loadSelectedContents = () => {
-    const selectedIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
-    const selectedItems = history.filter(item => selectedIds.includes(item.id));
-    setSelectedContents(selectedItems);
+    try {
+      const selectedIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
+      const selectedItems = history.filter(item => selectedIds.includes(item.id));
+      setSelectedContents(selectedItems);
+    } catch (error) {
+      console.error('Error parsing selected content IDs:', error);
+      setSelectedContents([]);
+      localStorage.setItem('selected_content_ids', '[]');
+    }
   };
 
   const fetchContentHistory = async (token: string) => {
@@ -123,9 +132,13 @@ const ContentUpload: React.FC = () => {
       const data = await response.json();
       console.log('Backend Response:', data);
 
-      // Save only the latest content ID
+      // Add new content ID to existing selected IDs
       if (data.contents?.id) {
-        localStorage.setItem('selected_content_ids', JSON.stringify([data.contents.id]));
+        const existingIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
+        if (!existingIds.includes(data.contents.id)) {
+          existingIds.push(data.contents.id);
+          localStorage.setItem('selected_content_ids', JSON.stringify(existingIds));
+        }
       }
 
       console.log('Upload successful!');
@@ -134,7 +147,6 @@ const ContentUpload: React.FC = () => {
       setShowModal(false);
       
       fetchContentHistory(token);
-      loadSelectedContents();
 
     } catch (error) {
       console.error('Upload error:', error);
@@ -155,19 +167,29 @@ const ContentUpload: React.FC = () => {
   };
 
   const handleAddContent = (contentId: string) => {
-    const selectedIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
-    if (!selectedIds.includes(contentId)) {
-      selectedIds.push(contentId);
-      localStorage.setItem('selected_content_ids', JSON.stringify(selectedIds));
-      loadSelectedContents();
+    try {
+      const selectedIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
+      if (!selectedIds.includes(contentId)) {
+        selectedIds.push(contentId);
+        localStorage.setItem('selected_content_ids', JSON.stringify(selectedIds));
+        loadSelectedContents();
+      }
+    } catch (error) {
+      console.error('Error adding content:', error);
+      localStorage.setItem('selected_content_ids', '[]');
     }
   };
 
   const handleRemoveContent = (contentId: string) => {
-    const selectedIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
-    const updatedIds = selectedIds.filter((id: string) => id !== contentId);
-    localStorage.setItem('selected_content_ids', JSON.stringify(updatedIds));
-    loadSelectedContents();
+    try {
+      const selectedIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
+      const updatedIds = selectedIds.filter((id: string) => id !== contentId);
+      localStorage.setItem('selected_content_ids', JSON.stringify(updatedIds));
+      loadSelectedContents();
+    } catch (error) {
+      console.error('Error removing content:', error);
+      localStorage.setItem('selected_content_ids', '[]');
+    }
   };
 
   const handleNext = () => {

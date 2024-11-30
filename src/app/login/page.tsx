@@ -38,7 +38,7 @@ export default function LoginPage() {
         setSuccessMessage("Login successful! Redirecting...");
         setTimeout(() => {
           setSuccessMessage(null);
-          router.push("/dashboard"); // Redirect to a dashboard or homepage
+          router.push("/DashBoard"); // Redirect to a dashboard or homepage
         }, 2000);
       } else {
         const errorData = await response.json();

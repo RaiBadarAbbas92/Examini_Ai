@@ -130,7 +130,7 @@ const Home: NextPage = () => {
                     <FaUser className="text-white" />
                   </button>
                 ) : (
-                  <button onClick={() => window.location.href = '/Login'} className="bg-green-500 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50 hover:scale-105">
+                  <button onClick={() => window.location.href = '/login'} className="bg-green-500 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50 hover:scale-105">
                     Login
                   </button>
                 )}
@@ -171,7 +171,7 @@ const Home: NextPage = () => {
                   <FaUser className="mr-2" /> Profile
                 </button>
               ) : (
-                <button onClick={() => window.location.href = '/Login'} className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition-colors duration-200">
+                <button onClick={() => window.location.href = '/login'} className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition-colors duration-200">
                   Login
                 </button>
               )}
@@ -201,10 +201,10 @@ const Home: NextPage = () => {
               </button>
             ) : (
               <>
-                <button className="bg-green-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50 hover:scale-105">
+                <button onClick={() => window.location.href = '/signup'} className="bg-green-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50 hover:scale-105">
                   Signup As Student
                 </button>
-                <button className="bg-green-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50 hover:scale-105">
+                <button onClick={() => window.location.href = '/signup'} className="bg-green-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50 hover:scale-105">
                   Signup As Teacher
                 </button>
               </>

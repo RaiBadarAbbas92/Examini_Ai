@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "../components/SiderBar/page";
+import Loader from "../components/lodder";
 
 const ExamGenerationAndConfirmationPage = () => {
   const [loading, setLoading] = useState(false);
@@ -62,7 +63,9 @@ const ExamGenerationAndConfirmationPage = () => {
       setMessage({text: 'Exam generated successfully!', type: 'success'});
 
       // Redirect to attempt exam page after successful generation
-      router.push('/attempt_exam');
+      setTimeout(() => {
+        router.push('/atempt_exam');
+      }, 2000); // Show success message for 2 seconds before redirecting
 
     } catch (error) {
       console.error('Error generating exam:', error);
@@ -85,6 +88,8 @@ const ExamGenerationAndConfirmationPage = () => {
       <Sidebar />
       <div className={`flex-1 transition-all duration-300 ${isSidebarCollapsed ? 'ml-20' : 'ml-[240px]'}`}>
         <div className="min-h-screen w-full bg-gradient-to-r from-blue-200 via-white to-green-200 flex flex-col items-center justify-center p-8 text-gray-800">
+          {loading && <Loader />}
+          
           {/* Page Header */}
           <header className="text-center mb-8">
             <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500 mb-2">
@@ -144,40 +149,10 @@ const ExamGenerationAndConfirmationPage = () => {
               </button>
               <button
                 onClick={handleGenerateExam}
-                className={`px-8 py-3 font-semibold rounded-lg ${
-                  loading
-                    ? "bg-green-300 cursor-wait"
-                    : "bg-green-500 hover:bg-green-600 text-white"
-                } transition-all duration-300`}
+                className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-all duration-300"
                 disabled={loading}
               >
-                {loading ? (
-                  <div className="flex items-center">
-                    <svg
-                      className="animate-spin h-5 w-5 mr-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Generating...
-                  </div>
-                ) : (
-                  "Generate Exam"
-                )}
+                Generate Exam
               </button>
             </div>
           </div>

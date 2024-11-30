@@ -9,11 +9,10 @@ const Sidebar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const menuItems = [
-    { icon: <FaHome className="w-6 h-6" />, label: 'Dashboard', href: '/dashboard' },
-    { icon: <FaUpload className="w-6 h-6" />, label: 'Upload Content', href: '/upload' },
-    { icon: <FaPlus className="w-6 h-6" />, label: 'Generate Exam', href: '/generate' },
-    { icon: <FaChartBar className="w-6 h-6" />, label: 'Analytics', href: '/analytics' },
-    { icon: <FaUser className="w-6 h-6" />, label: 'Profile', href: '/profile' },
+    { icon: <FaHome className="w-6 h-6" />, label: 'Dashboard', href: '/DashBoard' },
+    { icon: <FaUpload className="w-6 h-6" />, label: 'Upload Content', href: '/ContentUpload' },
+    { icon: <FaPlus className="w-6 h-6" />, label: 'Generate Exam', href: '/ExamGenration' },
+    { icon: <FaUser className="w-6 h-6" />, label: 'Profile', href: '/Profile' },
   ];
 
   const sidebarVariants = {
