@@ -27,7 +27,7 @@ const Textpad = () => {
       return;
     }
 
-    const accessToken = localStorage.getItem("auth_token");
+    const accessToken = localStorage.getItem("access_token");
 
     if (!accessToken) {
       alert("Access token not found. Please log in.");
