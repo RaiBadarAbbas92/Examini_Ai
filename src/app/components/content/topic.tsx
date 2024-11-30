@@ -12,7 +12,7 @@ const TopicPad = () => {
       return;
     }
 
-    const accessToken = localStorage.getItem("auth_token");
+    const accessToken = localStorage.getItem("access_token");
 
     if (!accessToken) {
       setResponseMessage("Access token not found. Please log in.");
