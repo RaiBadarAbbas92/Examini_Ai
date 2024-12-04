@@ -69,11 +69,11 @@ const ExamGenerationAndConfirmationPage = () => {
       setMessage({ text: 'Exam generated successfully!', type: 'success' });
   
       setTimeout(() => {
-        router.push('/atempt_exam');
+        router.push('/attempt_exam'); // Corrected the typo from 'atempt_exam' to 'attempt_exam'
       }, 2000);
-    } catch (error) {
+    } catch (error: unknown) { // Specified the type of error to avoid TypeScript error
       console.error('Error generating exam:', error);
-      setMessage({ text: error.message || 'Failed to generate exam. Please try again.', type: 'error' });
+      setMessage({ text: (error as Error).message || 'Failed to generate exam. Please try again.', type: 'error' });
     } finally {
       setLoading(false);
     }
