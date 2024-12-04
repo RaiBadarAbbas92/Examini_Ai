@@ -1,33 +1,109 @@
-// Add this line to mark the component as a client-side component
-"use client"; 
+"use client"
+import { useState } from "react";
+import {
+  FaMale,
+  FaFemale,
+  FaGlobe,
+  FaUserGraduate,
+  FaBrain,
+  FaHandsHelping,
+  FaBook,
+  FaAward,
+  FaRunning,
+  FaFlagCheckered,
+  FaMedal,
+} from "react-icons/fa";
 
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { FaMale, FaFemale, FaGlobe, FaUserGraduate, FaBrain, FaHandsHelping, FaBook, FaAward, FaRunning, FaFlagCheckered, FaMedal } from "react-icons/fa";
-
-// Example of onboarding questions
 const questions = [
+  {
+    id: "age",
+    question: "What is your age group?",
+    options: ["Under 10", "10-15", "16-20", "21+"],
+    icons: [<FaUserGraduate />, "🎉", "🎓", "🏆"],
+  },
   {
     id: "gender",
     question: "What is your gender?",
-    options: ["Male", "Female"],
-    icons: [<FaMale />, <FaFemale />]
+    options: ["Male", "Female", "Other"],
+    icons: [<FaMale />, <FaFemale />, "🌈"],
   },
-  // Add other questions here...
+  {
+    id: "country",
+    question: "Which country are you from?",
+    options: ["United States", "India", "United Kingdom", "Other"],
+    icons: [<FaGlobe />, "🇮🇳", "🇬🇧", "🌍"],
+  },
+  {
+    id: "social_interaction_style",
+    question: "What is your social interaction style?",
+    options: ["Introvert", "Extrovert", "Ambivert"],
+    icons: ["📖", "🎤", "⚖️"],
+  },
+  {
+    id: "decision_making_approach",
+    question: "How do you make decisions?",
+    options: ["Thinker", "Feeler"],
+    icons: [<FaBrain />, "❤️"],
+  },
+  {
+    id: "current_level_of_education",
+    question: "What is your current level of education?",
+    options: ["Kindergarten", "Primary", "High School", "College"],
+    icons: ["📚", "✏️", "🏫", "🎓"],
+  },
+  {
+    id: "last_grade",
+    question: "What was your last grade?",
+    options: ["A+", "A", "B", "C or below"],
+    icons: [<FaMedal />, "🌟", "📜", "📉"],
+  },
+  {
+    id: "favorite_subject",
+    question: "What is your favorite subject?",
+    options: ["Mathematics", "Science", "History", "Other"],
+    icons: ["📐", "🔬", "📜", "🌟"],
+  },
+  {
+    id: "interested_career_paths",
+    question: "What career path interests you the most?",
+    options: ["Engineering", "Medicine", "Arts", "Sports"],
+    icons: ["⚙️", "💉", "🎨", <FaRunning />],
+  },
+  {
+    id: "free_time_activities",
+    question: "What do you like to do in your free time?",
+    options: ["Sports", "Reading", "Gaming", "Other"],
+    icons: [<FaRunning />, "📚", "🎮", "🌟"],
+  },
+  {
+    id: "motivation_to_study",
+    question: "What motivates you to study?",
+    options: ["Grades", "Learning", "Career", "Other"],
+    icons: [<FaAward />, "📘", "🏆", "✨"],
+  },
+  {
+    id: "short_term_academic_goals",
+    question: "What is your short-term academic goal?",
+    options: ["Improve Grades", "Learn a Skill", "Pass Exams", "Other"],
+    icons: ["📊", "🛠️", "🎓", "🌟"],
+  },
+  {
+    id: "long_term_academic_goals",
+    question: "What is your long-term academic goal?",
+    options: ["Graduate College", "Build Career", "Start a Business", "Other"],
+    icons: [<FaFlagCheckered />, "📈", "💼", "🌟"],
+  },
 ];
 
 const Onboarding = () => {
-  const router = useRouter(); // Ensure you use useRouter here
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const current = questions[currentQuestion];
 
   const handleOptionSelect = (option: string) => {
-    const newAnswers = { ...answers, [current.id]: option };
-    setAnswers(newAnswers);
-    // Handle any further logic for each option selected...
+    setAnswers((prev) => ({ ...prev, [current.id]: option }));
   };
 
   const handleNext = () => {
@@ -35,46 +111,61 @@ const Onboarding = () => {
   };
 
   const handleSubmit = async () => {
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      alert("Access token not found!");
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
-      const accessToken = localStorage.getItem("access_token");
-      const formattedData = { /* your formatted data here */ };
-      console.log("Submitting data:", formattedData);
-
-      const response = await fetch("https://your-api-endpoint", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(formattedData),
-      });
-
-      const data = await response.json();
-      console.log("Profile creation response:", data);
+      const response = await fetch(
+        "https://examinieai.kindsky-c4c0142e.eastus.azurecontainerapps.io/student/create_profile/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify(answers),
+        }
+      );
 
       if (response.ok) {
-        router.push("/dashboard"); // Navigate to dashboard on success
+        alert("Profile created successfully!");
       } else {
-        console.error("Error:", data.message);
+        alert("Failed to submit profile!");
       }
     } catch (error) {
-      console.error("Error during profile creation:", error);
+      console.error("Error submitting profile:", error);
+      alert("An error occurred!");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-green-50 flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-green-600 mb-8">Let's take some quick questions!</h1>
-      
+      {/* Heading */}
+      <h1 className="text-4xl font-bold text-green-600 mb-8 animate-bounce">
+        Let's take some quick questions!
+      </h1>
+
+      {/* Question */}
       <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl text-green-800 font-semibold mb-6">{current.question}</h2>
-        
+        <h2 className="text-2xl text-green-800 font-semibold mb-6">
+          {current.question}
+        </h2>
+
+        {/* Options */}
         <div className="grid grid-cols-2 gap-4">
           {current.options.map((option, index) => (
             <button
               key={option}
-              className={`p-4 bg-green-100 border border-green-300 rounded-lg shadow transform transition duration-300 ${
-                answers[current.id] === option ? "bg-green-300 scale-105" : "hover:scale-105"
+              className={`flex flex-col items-center justify-center p-4 bg-green-100 border border-green-300 rounded-lg shadow transform transition duration-300 ${
+                answers[current.id] === option
+                  ? "bg-green-300 scale-105"
+                  : "hover:scale-105"
               }`}
               onClick={() => handleOptionSelect(option)}
             >
@@ -86,10 +177,11 @@ const Onboarding = () => {
           ))}
         </div>
 
+        {/* Navigation Buttons */}
         <div className="mt-8 flex justify-between">
           {currentQuestion > 0 && (
             <button
-              className="px-6 py-2 bg-green-400 text-white font-bold rounded shadow hover:bg-green-500"
+              className="px-6 py-2 bg-green-400 text-white font-bold rounded shadow hover:bg-green-500 transition duration-300"
               onClick={() => setCurrentQuestion((prev) => prev - 1)}
             >
               Back
@@ -97,7 +189,7 @@ const Onboarding = () => {
           )}
           {currentQuestion < questions.length - 1 ? (
             <button
-              className="px-6 py-2 bg-green-500 text-white font-bold rounded shadow hover:bg-green-600"
+              className="px-6 py-2 bg-green-500 text-white font-bold rounded shadow hover:bg-green-600 transition duration-300"
               onClick={handleNext}
               disabled={!answers[current.id]}
             >
@@ -105,10 +197,13 @@ const Onboarding = () => {
             </button>
           ) : (
             <button
-              className="px-6 py-2 bg-green-700 text-white font-bold rounded shadow hover:bg-green-800"
+              className={`px-6 py-2 bg-green-700 text-white font-bold rounded shadow hover:bg-green-800 transition duration-300 ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+              }`}
               onClick={handleSubmit}
+              disabled={isSubmitting || !answers[current.id]}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           )}
         </div>
@@ -118,4 +213,3 @@ const Onboarding = () => {
 };
 
 export default Onboarding;
- 
