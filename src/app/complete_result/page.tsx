@@ -136,7 +136,7 @@ export default function Result(): JSX.Element {
           <p className="mt-4">{error}</p>
           <button
             className="mt-6 bg-white text-red-500 px-4 py-2 rounded shadow hover:bg-gray-200"
-            onClick={() => router.push("/dashboard")}
+            onClick={() => router.push("/DashBoard")}
           >
             Go to Dashboard
           </button>
