@@ -246,7 +246,7 @@ export default function Result(): JSX.Element {
             </motion.button>
             <motion.button
               className="bg-white text-green-500 px-4 py-2 rounded shadow hover:bg-gray-200 flex items-center gap-2"
-              onClick={() => router.push("/dashboard")}
+              onClick={() => router.push("/DashBoard")}
               whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
