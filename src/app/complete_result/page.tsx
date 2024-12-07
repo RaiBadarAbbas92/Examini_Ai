@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaCheckCircle, FaRedo, FaArrowCircleRight } from "react-icons/fa";
 import { Pie } from "react-chartjs-2";
+import Loader from '../components/2loder'; // Importing the Loader component
 import { motion } from "framer-motion";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
@@ -124,11 +125,7 @@ export default function Result(): JSX.Element {
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-green-100">
-        <div className="text-green-500 font-semibold">Loading your result...</div>
-      </div>
-    );
+    return <Loader />; // Use the Loader component from 2loder.tsx
   }
 
   if (error) {
@@ -139,7 +136,7 @@ export default function Result(): JSX.Element {
           <p className="mt-4">{error}</p>
           <button
             className="mt-6 bg-white text-red-500 px-4 py-2 rounded shadow hover:bg-gray-200"
-            onClick={() => router.push("/DashBoard")}
+            onClick={() => router.push("/dashboard")}
           >
             Go to Dashboard
           </button>
@@ -190,16 +187,16 @@ export default function Result(): JSX.Element {
           <h1 className="text-5xl font-bold text-center text-green-500 mt-11 mb-8">
             Your Result
           </h1>
-<div className="flex justify-center items-center">
-          {/* Pie Chart */}
-          <motion.div
-            className="flex justify-center mb-6 w-52"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Pie data={pieData} options={{ responsive: true }} />
-          </motion.div>
+          <div className="flex justify-center items-center">
+            {/* Pie Chart */}
+            <motion.div
+              className="flex justify-center mb-6 w-52"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Pie data={pieData} options={{ responsive: true }} />
+            </motion.div>
           </div>
           <div className="flex text-green-700 text-lg mb-4 gap-14 justify-center bg-green-200 p-6 rounded-lg shadow-xl">
             <p>
