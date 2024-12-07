@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa'
 
 const Footer = () => {
+  const logoUrl = "/logo.png"; // Use a local logo image instead
+
   return (
     <footer className="bg-white text-gray-800 pt-12 pb-8">
       <div className="container mx-auto px-4">
@@ -15,7 +17,7 @@ const Footer = () => {
           <div className="col-span-1">
             <div className="flex items-center mb-4">
               <Image 
-                src="/logo.png"
+                src={logoUrl} // Use the logoUrl variable
                 alt="Examii AI Logo"
                 width={40}
                 height={40}
@@ -54,8 +56,8 @@ const Footer = () => {
           {/* Contact */}
           <div className="col-span-1">
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-            <p className="text-gray-600">Email: info@examiiai.com</p>
-            <p className="text-gray-600">Phone: +1 234 567 890</p>
+            <p className="text-gray-600">Email: raibadar37218@gmail.com</p>
+            <p className="text-gray-600">Phone: +92 319 4821372</p>
           </div>
         </div>
 
@@ -66,7 +68,7 @@ const Footer = () => {
             {[
               { name: 'Zain Attiq', role: 'Backend Developer', image: '/zain.png' },
               { name: 'Badar Abbas', role: 'Frontend Developer + Api Integration', image: '/badar.jpg' },
-              { name: 'Dev Tahir ', role: 'Frontend Developer', image: '/team3.jpg' },
+              { name: 'Dev Tahir ', role: 'Frontend Developer + Api Integration', image: '/tahir.jpg' },
               { name: 'Ali Haider', role: 'Frontend Developer', image: '/team4.jpg' }
             ].map((member, index) => (
               <div key={index} className="text-center">
