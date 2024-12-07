@@ -1,4 +1,3 @@
-
 "use client"
 import { useState } from "react";
 import {
@@ -96,7 +95,7 @@ const questions = [
   },
 ];
 
-const additionalOptions = {
+const additionalOptions: Record<string, string[]> = {
   country : ["Canada","United Kingdom","Australia","Germany","France","Italy","Spain","Brazil","Mexico","Japan","China","India","Pakistan","Russia","South Africa","Nigeria","Egypt","Turkey","Saudi Arabia","Argentina","South Korea","New Zealand","Sweden","Norway","Denmark","Netherlands","Belgium","Switzerland","United Arab Emirates","Malaysia","Singapore","Indonesia","Philippines","Thailand"],
   current_level_of_education : ["Kindergarten","Primary School","Middle School","High School","Undergraduate","Postgraduate","Doctorate","Other"],
   last_grade : ["A+","A","A-","B+","B","B-","C+","C","C-","D+","D","D-","F","I","P","F","Other"],
@@ -243,7 +242,7 @@ const Onboarding = () => {
           <div className="mt-4">
             <h3 className="text-lg text-green-800 font-semibold mb-2">Please specify:</h3>
             <div className="grid grid-cols-2 gap-4">
-              {additionalOptions[current.id] && additionalOptions[current.id].map((option: string) => (
+              {additionalOptions[current.id as keyof typeof additionalOptions] && additionalOptions[current.id as keyof typeof additionalOptions].map((option: string) => (
                 <button
                   key={option}
                   className="flex flex-col items-center justify-center p-4 bg-green-100 border border-green-300 rounded-lg shadow transform transition duration-300 hover:scale-105"
