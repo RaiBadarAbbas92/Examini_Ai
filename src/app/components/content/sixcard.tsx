@@ -35,6 +35,14 @@ const ContentUpload: React.FC = () => {
 
     fetchContentHistory(token);
     loadSelectedContents();
+
+    // Set up interval to fetch content history every second
+    const intervalId = setInterval(() => {
+      fetchContentHistory(token);
+    }, 100);
+
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   const loadSelectedContents = () => {
@@ -100,7 +108,7 @@ const ContentUpload: React.FC = () => {
 
       let token;
       try {
-        token = localStorage.getItem('auth_token');
+        token = localStorage.getItem('access_token');
         if (!token) throw new Error('Authentication token not found');
       } catch (e) {
         throw new Error('Unable to access localStorage. Please ensure cookies are enabled.');
@@ -111,7 +119,7 @@ const ContentUpload: React.FC = () => {
         formData.append('file', file);
         formData.append('title', file.name);
       });
-      formData.append('auth_token', token);
+      formData.append('access_token', token);
 
       const response = await fetch(`${baseUrl}${selectedType.endpoint}`, {
         method: 'POST',
