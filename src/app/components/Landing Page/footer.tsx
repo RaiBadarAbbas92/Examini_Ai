@@ -69,7 +69,7 @@ const Footer = () => {
               { name: 'Zain Attiq', role: 'Backend Developer', image: '/zain.png' },
               { name: 'Badar Abbas', role: 'Frontend Developer + Api Integration', image: '/badar.jpg' },
               { name: 'Dev Tahir ', role: 'Frontend Developer + Api Integration', image: '/tahir.jpg' },
-              { name: 'Ali Haider', role: 'Frontend Developer', image: '/team4.jpg' }
+              { name: 'Ali Haider', role: 'Frontend Developer + API Integration', image: '/team4.jpg' }
             ].map((member, index) => (
               <div key={index} className="text-center">
                 <div className="relative w-32 h-32 mx-auto mb-4">
