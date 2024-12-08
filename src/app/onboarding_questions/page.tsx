@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import { useRouter } from 'next/navigation'; // Import useRouter from next/navigation
 import {
   FaMale,
   FaFemale,
@@ -106,11 +107,13 @@ const additionalOptions: Record<string, string[]> = {
 };
 
 const Onboarding = () => {
+  const router = useRouter(); // Initialize router
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showAdditionalOptions, setShowAdditionalOptions] = useState(false);
   const [selectedAdditionalOption, setSelectedAdditionalOption] = useState("");
   const [loading, setLoading] = useState(false); // State for loading
+  const [successMessage, setSuccessMessage] = useState(""); // State for success message
 
   const current = questions[currentQuestion];
 
@@ -197,6 +200,12 @@ const Onboarding = () => {
         throw new Error(data.message || 'Failed to create profile');
       }
 
+      // Set success message on successful profile creation
+      setSuccessMessage("Profile created successfully!");
+
+      // Redirect to Dashboard page on successful profile creation
+      router.push('/DashBoard'); // Use router to navigate to the Dashboard
+
     } catch (error) {
       console.error('Error creating profile:', error);
     } finally {
@@ -210,6 +219,9 @@ const Onboarding = () => {
       <h1 className="text-4xl font-bold text-green-600 mb-8 animate-bounce">
         Let's take some quick questions!
       </h1>
+
+      {/* Success Message */}
+      {successMessage && <div className="text-green-600 font-bold mb-4">{successMessage}</div>}
 
       {/* Question */}
       <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
