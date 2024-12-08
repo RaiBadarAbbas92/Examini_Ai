@@ -45,43 +45,58 @@ const ContentUpload: React.FC = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const loadSelectedContents = () => {
+  const loadSelectedContents = (updatedHistory = history) => {
     try {
       const selectedIds = JSON.parse(localStorage.getItem('selected_content_ids') || '[]');
-      const selectedItems = history.filter(item => selectedIds.includes(item.id));
+      const selectedItems = updatedHistory.filter((item) => selectedIds.includes(item.id));
       setSelectedContents(selectedItems);
     } catch (error) {
       console.error('Error parsing selected content IDs:', error);
-      // Reset to empty array if parsing fails
       localStorage.setItem('selected_content_ids', '[]');
       setSelectedContents([]);
     }
   };
-
+  
   const fetchContentHistory = async (token: string) => {
     try {
       const response = await fetch(`https://examinieai.kindsky-c4c0142e.eastus.azurecontainerapps.io/content_upload/get_contents_by_student_id/`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to fetch content history');
       }
-
+  
       const data = await response.json();
-      setHistory(data.contents || []);
-
+      const fetchedHistory = data.contents || [];
+      setHistory(fetchedHistory);
+      loadSelectedContents(fetchedHistory); // Update selected contents based on the fetched history
     } catch (error) {
       console.error('Error fetching content history:', error);
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
     }
   };
-
+  
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+  
+    if (!token) {
+      console.error('Authentication token not found');
+      return;
+    }
+  
+    fetchContentHistory(token);
+    loadSelectedContents(); // Ensure local storage IDs are loaded
+  
+    const intervalId = setInterval(() => {
+      fetchContentHistory(token);
+    }, 100);
+  
+    return () => clearInterval(intervalId);
+  }, []);
+  
   const handleSelectContentType = (type: string) => {
     setSelectedContentType(type);
     setShowModal(true);
