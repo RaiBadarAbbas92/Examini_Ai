@@ -196,7 +196,7 @@ const Home: NextPage = () => {
 
           <div className="mt-8 flex justify-center lg:justify-start gap-4">
             {isLoggedIn ? (
-              <button onClick={() => window.location.href = '/dashboard'} className="bg-green-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50 hover:scale-105">
+              <button onClick={() => window.location.href = '/DashBoard'} className="bg-green-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50 hover:scale-105">
                 Go to Dashboard
               </button>
             ) : (
