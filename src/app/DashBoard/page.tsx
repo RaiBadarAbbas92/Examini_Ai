@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useEffect, useRef } from 'react';
 import { FaUser, FaUpload, FaPencilAlt, FaClipboardList, FaChartBar, FaSignOutAlt, FaBookOpen, FaCheck, FaTimes, FaPercentage, FaStar, FaBars, FaGraduationCap } from 'react-icons/fa';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, AreaChart, Area } from 'recharts';
