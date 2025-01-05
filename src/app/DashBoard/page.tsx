@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState, useEffect, useRef } from 'react';
 import { FaUser, FaUpload, FaPencilAlt, FaClipboardList, FaChartBar, FaSignOutAlt, FaBookOpen, FaCheck, FaTimes, FaPercentage, FaStar, FaBars, FaGraduationCap } from 'react-icons/fa';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, AreaChart, Area } from 'recharts';
@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const ExamList = () => {
-  const [activeTab, setActiveTab] = useState('DashBoard');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [hoveredPieIndex, setHoveredPieIndex] = useState<number | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -258,7 +258,7 @@ const ExamList = () => {
             { icon: FaBookOpen, label: 'Total Exams', value: progressData.total_exams_taken, color: 'blue' },
             { icon: FaCheck, label: 'Total Pass', value: progressData.exams_passed, color: 'green' },
             { icon: FaTimes, label: 'Total Fail', value: progressData.exams_failed, color: 'red' },
-            { icon: FaPercentage, label: 'Success Rate', value: `${parseFloat(progressData.overall_percentage.toFixed(2))}%`, color: 'purple' },
+            { icon: FaPercentage, label: 'Success Rate', value: `${parseFloat(progressData.overall_percentage?.toFixed(2))}%`, color: 'purple' },
             { icon: FaGraduationCap, label: 'Total Grade', value: progressData.overall_grade, color: 'indigo' }
           ].map(({ icon: Icon, label, value, color }) => (
             <div
