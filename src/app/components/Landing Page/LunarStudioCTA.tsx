@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { FaMoon, FaStar, FaArrowRight, FaRobot, FaBrain, FaDatabase, FaRocket, FaAi } from 'react-icons/fa'
+import { FaMoon, FaStar, FaArrowRight, FaRobot, FaBrain, FaDatabase, FaRocket } from 'react-icons/fa'
 import { FaRobot as FaRobotSolid } from 'react-icons/fa6'
 import Link from 'next/link'
 

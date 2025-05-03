@@ -8,8 +8,6 @@ import {
   FaGlobe,
   FaUserGraduate,
   FaBrain,
-  FaHandsHelping,
-  FaBook,
   FaAward,
   FaRunning,
   FaFlagCheckered,
